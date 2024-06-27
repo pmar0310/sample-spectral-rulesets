@@ -1,0 +1,15 @@
+extends: [[spectral:oas, off]]
+
+rules:
+  oas3-schema: true
+  # MUST use lowercase separate words with hyphens for path segments [129]
+  must-use-lowercase-with-hypens-for-path-segements:
+    message: Path segments have to be lowercase separate words with hyphens
+    description: MUST use lowercase separate words with hyphens for path segments [129]
+    documentationUrl: https://api-linter.cloud.sysco.net:9191/#129
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: ^(?=((([\/a-z][a-z0-9\-\/]*)?({[^}]*})?)+))\1$
